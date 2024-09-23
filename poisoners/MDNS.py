@@ -58,6 +58,8 @@ class MDNS(BaseRequestHandler):
 			data, soc = self.request
 			Request_Name = Parse_MDNS_Name(data)
 			MDNSType = Parse_IPV6_Addr(data)
+			if b"_dosvc" in data:
+				return
 			# Break out if we don't want to respond to this host
 		
 			if (not Request_Name) or (RespondToThisHost(self.client_address[0].replace("::ffff:",""), Request_Name) is not True):
